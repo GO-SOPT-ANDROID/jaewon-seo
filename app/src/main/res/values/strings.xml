@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">GO SOPT Android</string>
+    <string name="app_name">GO SOPT Android with JaewonSeo</string>
+    <string name="welcome_comment">Welcome to GO Android!</string>
+    <string name="login">LOGIN</string>
+    <string name="name">이름</string>
+    <string name="specialty">특기</string>
+    <string name="signup">SIGN UP</string>
+    <string name="singup_compelete">회원가입 완료</string>
 </resources>
