@@ -18,13 +18,11 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         with(binding)
         {
                 buttonSignupComplete.setOnClickListener {
-                    Log.d("a","dd")
                     if(edittextSignupId.length()>=6 && edittextSignupId.length()<=10 && // 6 <= id  <=10
                         edittextSignupPw.length() >=8 && edittextSignupPw.length() <=12 && // 8 <= pw < =12
                             edittextSignupName.length() !=0 && edittextSignupSpecialty.length() != 0){ // 특기 이름 != 0
@@ -41,7 +39,6 @@ class SignUpActivity : AppCompatActivity() {
                             "회원가입이 완료되었습니다.",
                             Snackbar.LENGTH_SHORT
                         ).show()
-
                         finish()
                     } else {
                         Snackbar.make(

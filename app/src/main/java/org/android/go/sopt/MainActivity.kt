@@ -25,10 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setResultSignUp()
-
         binding.buttonMainLogin.setOnClickListener {
-                Log.d("1",id.toString())
-                Log.d("2",binding.edittextMainId.text.toString())
                 if(binding.edittextMainId.text.toString() == id && binding.edittextMainPw.text.toString()==pw) {
                     Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
 
