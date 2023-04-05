@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingVertical="30dp"
+    android:paddingHorizontal="30dp"
     tools:context=".SignUpActivity">
 
     <TextView
         android:id="@+id/textview_signup_title"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_height="40dp"
         android:layout_marginHorizontal="30dp"
         android:gravity="center"
         android:text="@string/signup"
@@ -19,17 +24,17 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="50dp" />
 
     <TextView
         android:id="@+id/textview_signup_id"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="19dp"
+        android:layout_height="21dp"
         android:layout_marginTop="70dp"
         android:gravity="left"
-        android:text="ID"
+        android:text="@string/id"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/textview_signup_title"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_signup_title" />
 
     <EditText
@@ -37,9 +42,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:hint="아이디를 입력하세요"
-        app:layout_constraintEnd_toEndOf="@+id/textview_signup_title"
-        app:layout_constraintStart_toStartOf="@+id/textview_signup_id"
+        android:hint="@string/input_id"
+        android:inputType="textWebEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_signup_id" />
 
     <TextView
@@ -48,9 +54,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="left"
-        android:text="PW"
+        android:text="@string/pw"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/textview_signup_id"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edittext_signup_id" />
 
     <EditText
@@ -58,9 +64,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:hint="비밀번호를 입력하세요"
-        app:layout_constraintEnd_toEndOf="@+id/edittext_signup_id"
-        app:layout_constraintStart_toStartOf="@+id/textview_signup_pw"
+        android:hint="@string/input_pw"
+        android:inputType="textWebEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_signup_pw"
         tools:ignore="MissingConstraints" />
 
@@ -72,7 +79,7 @@
         android:gravity="left"
         android:text="@string/name"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/textview_signup_id"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edittext_signup_pw" />
 
     <EditText
@@ -80,8 +87,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="이름을 입력하세요"
-        app:layout_constraintEnd_toEndOf="@+id/edittext_signup_id"
-        app:layout_constraintStart_toStartOf="@+id/textview_signup_pw"
+        android:inputType="textWebEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_signup_name"
         tools:ignore="MissingConstraints" />
 
@@ -89,20 +97,21 @@
         android:id="@+id/textview_signup_specialty"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="left"
         android:layout_marginTop="20dp"
+        android:gravity="left"
         android:text="@string/specialty"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/textview_signup_id"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edittext_signup_name" />
 
     <EditText
         android:id="@+id/edittext_signup_specialty"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="특기를 입력하세요"
-        app:layout_constraintEnd_toEndOf="@+id/edittext_signup_id"
-        app:layout_constraintStart_toStartOf="@+id/textview_signup_pw"
+        android:hint="@string/input_specialty"
+        android:inputType="textWebEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_signup_specialty"
         tools:ignore="MissingConstraints" />
 
@@ -110,11 +119,13 @@
         android:id="@+id/button_signup_complete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:paddingVertical="20dp"
         android:text="@string/singup_compelete"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="@+id/textview_signup_title"
-        app:layout_constraintEnd_toEndOf="@id/textview_signup_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edittext_signup_specialty" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

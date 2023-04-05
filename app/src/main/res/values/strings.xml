@@ -6,4 +6,10 @@
     <string name="specialty">특기</string>
     <string name="signup">SIGN UP</string>
     <string name="singup_compelete">회원가입 완료</string>
+    <string name="id">ID</string>
+    <string name="pw">PW</string>
+    <string name="input_id">아이디를 입력하세요</string>
+    <string name="input_pw">비밀번호를 입력하세요</string>
+    <string name="input_name">이름을 입력하세요</string>
+    <string name="input_specialty">특기를 입력하세요</string>
 </resources>
