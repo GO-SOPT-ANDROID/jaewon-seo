@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import org.android.go.sopt.MyAdapter
 import org.android.go.sopt.R
 import org.android.go.sopt.databinding.FragmentHomeBinding
 
@@ -18,6 +20,8 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+// 어뎁터와 레이아웃 매니저가 필요하다
 class HomeFragment: Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding
@@ -35,6 +39,8 @@ class HomeFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // 대부분의 로직은 여기에 구현합니다.
+        binding.rv.adapter = MyAdapter(requireContext()) //requireContext context가 nullable이 아니라서 받아오는 함수
+        binding.rv.layoutManager =LinearLayoutManager(context)
     }
 
     override fun onDestroyView() {
