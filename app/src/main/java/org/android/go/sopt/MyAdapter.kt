@@ -37,6 +37,6 @@ class  MyViewHolder(private val binding: ItemGithubRepoBinding):
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(item :Repo){ // 받아온 값을 하나씩 매칭
             binding.tvItemName.text = item.name
-            binding.tvItemAuthor.text = item.author
+            binding.tvItemUrl.text = item.author
         }
 }
