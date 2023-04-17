@@ -1,28 +1,19 @@
 package org.android.go.sopt
 
-import android.app.Activity
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.MotionEvent
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import org.android.go.sopt.databinding.ActivityMainBinding
+import org.android.go.sopt.databinding.ActivityGithubrepoBinding
 import org.android.go.sopt.home.GalleryFragment
 import org.android.go.sopt.home.HomeFragment
 import org.android.go.sopt.home.SearchFragment
 
-class MainActivity : AppCompatActivity() {
+class GithubRepoActivity : AppCompatActivity() {
 
-    lateinit var binding : ActivityMainBinding
+    lateinit var binding : ActivityGithubrepoBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityGithubrepoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fcv_main)
