@@ -10,7 +10,8 @@ import org.android.go.sopt.databinding.ItemGithubRepoBinding
 class MyAdapter(context: Context) : RecyclerView.Adapter<MyViewHolder>() {
     private  val inflater by lazy {LayoutInflater.from(context)} // context를 활용하여 인프레이터 제작
 
-    val itemList: List<Repo> = listOf(Repo("repo1","author1"),Repo("repo2","author2"))
+    val itemList: List<Repo> = listOf(Repo("repo1","author1"),
+        Repo("repo2","author2"),Repo("repo3","author3"),Repo("repo4","author4"),Repo("repo5","author5"),Repo("repo6","author6"),Repo("repo7","author7"),Repo("repo8","author8"))
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder { //뷰 홀더 제작
         val binding: ItemGithubRepoBinding = ItemGithubRepoBinding.inflate ( // 아이템 매칭 필요
             inflater, // 레이아웃 인플레이터
