@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.android.go.sopt.MyAdapter
 import org.android.go.sopt.R
+import org.android.go.sopt.TitleAdapter
 import org.android.go.sopt.databinding.FragmentHomeBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -39,7 +41,8 @@ class HomeFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // 대부분의 로직은 여기에 구현합니다.
-        binding.rv.adapter = MyAdapter(requireContext()) //requireContext context가 nullable이 아니라서 받아오는 함수
+        val concapAdapter = ConcatAdapter(TitleAdapter(requireContext()),MyAdapter(requireContext()))
+        binding.rv.adapter =concapAdapter
         binding.rv.layoutManager =LinearLayoutManager(context)
     }
 
