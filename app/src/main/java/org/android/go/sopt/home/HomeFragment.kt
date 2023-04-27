@@ -42,8 +42,8 @@ class HomeFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // 대부분의 로직은 여기에 구현합니다.
         val concapAdapter = ConcatAdapter(TitleAdapter(requireContext()),MyAdapter(requireContext()))
-        binding.rv.adapter =concapAdapter
-        binding.rv.layoutManager =LinearLayoutManager(context)
+        binding.fcvRv.adapter =concapAdapter
+        binding.fcvRv.layoutManager =LinearLayoutManager(context)
     }
 
     override fun onDestroyView() {
