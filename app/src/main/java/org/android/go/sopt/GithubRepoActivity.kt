@@ -16,12 +16,9 @@ class GithubRepoActivity : AppCompatActivity() {
         binding = ActivityGithubrepoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val currentFragment = supportFragmentManager.findFragmentById(R.id.fcv_main)
-        if (currentFragment == null) {
-            supportFragmentManager.beginTransaction()
-                .add(R.id.fcv_main, HomeFragment())
-                .commit()
-        }
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.fcv_main) ?: supportFragmentManager.beginTransaction()
+            .add(R.id.fcv_main, HomeFragment())
+            .commit()
 
         binding.bnvMain.setOnItemSelectedListener { item ->
                 when (item.itemId) {
