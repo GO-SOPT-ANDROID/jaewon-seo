@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.android.go.sopt.databinding.ItemGithubRepoBinding
+import org.android.go.sopt.sampledata.Repo
 
 class MyAdapter(context: Context) : RecyclerView.Adapter<MyViewHolder>() {
     private  val inflater by lazy {LayoutInflater.from(context)} // context를 활용하여 인프레이터 제작
@@ -28,10 +29,7 @@ class MyAdapter(context: Context) : RecyclerView.Adapter<MyViewHolder>() {
     }
 
 }
-data class Repo(
-    val name: String,
-    val author: String
-)
+
 
 class  MyViewHolder(private val binding: ItemGithubRepoBinding):
         RecyclerView.ViewHolder(binding.root) {

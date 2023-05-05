@@ -27,7 +27,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // 대부분의 로직은 여기에 구현합니다.
         val concapAdapter = ConcatAdapter(TitleAdapter(requireContext()), MyAdapter(requireContext()))
         binding.fcvRv.adapter = concapAdapter
         binding.fcvRv.layoutManager = LinearLayoutManager(context)
