@@ -8,7 +8,7 @@ import org.android.go.sopt.databinding.ItemGithubRepoBinding
 import org.android.go.sopt.sampledata.Repo
 
 class MyAdapter(context: Context) : RecyclerView.Adapter<MyViewHolder>() {
-    private  val inflater by lazy {LayoutInflater.from(context)} // context를 활용하여 인프레이터 제작
+    private  val inflater by lazy {LayoutInflater.from(context)} // context를 활용하여 인플레이터 제작
 
     val itemList: List<Repo> = listOf(Repo("repo1","author1"),
         Repo("repo2","author2"),Repo("repo3","author3"),Repo("repo4","author4"),Repo("repo5","author5"),Repo("repo6","author6"),Repo("repo7","author7"),Repo("repo8","author8"))
@@ -20,7 +20,7 @@ class MyAdapter(context: Context) : RecyclerView.Adapter<MyViewHolder>() {
         return MyViewHolder(binding)
     }
 
-    override fun getItemCount(): Int { // 배열아 크기
+    override fun getItemCount(): Int { //배열의 크기
         return itemList.size
     }
 

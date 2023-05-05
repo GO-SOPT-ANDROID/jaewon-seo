@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.android.go.sopt.databinding.ItemHomeTitleBinding
 
 class TitleAdapter(context: Context) : RecyclerView.Adapter<TitleViewHolder>() {
-    val itemList: List<Text> = listOf(Text("Jaewon's GithubRepo"),Text("@librarywon"))
+    val title = Text("Jaewon's GithubRepo")
     private  val inflater by lazy {LayoutInflater.from(context)} // context를 활용하여 인프레이터 제작
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TitleViewHolder { //뷰 홀더 제작
         val binding: ItemHomeTitleBinding = ItemHomeTitleBinding.inflate ( // 아이템 매칭 필요
@@ -16,12 +16,12 @@ class TitleAdapter(context: Context) : RecyclerView.Adapter<TitleViewHolder>() {
         )
         return TitleViewHolder(binding)
     }
-    override fun getItemCount(): Int { // 배열아 크기
-        return itemList.size
+    override fun getItemCount(): Int {
+       return 1
     }
 
     override fun onBindViewHolder(holder: TitleViewHolder, position: Int) { // 홀더 제작 후 반환
-        holder.onBind(itemList[position])  //배열에서 받아옴
+        holder.onBind(title)  //배열에서 받아옴
     }
 
 }
@@ -30,7 +30,7 @@ data class Text(
 )
 class  TitleViewHolder(private val binding: ItemHomeTitleBinding):
     RecyclerView.ViewHolder(binding.root) {
-    fun onBind(item :Text){ // 받아온 값을 하나씩 매칭
+    fun onBind(item :Text){
         binding.tvHomeTitle.text = item.text
     }
 }
