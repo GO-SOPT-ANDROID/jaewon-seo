@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import org.android.go.sopt.R
+import org.android.go.sopt.adapter.GalleryPagerAdapter
 import org.android.go.sopt.databinding.FragmentGalleryBinding
 
-class GalleryFragment: Fragment() {
+class GalleryFragment : Fragment() {
     private var _binding: FragmentGalleryBinding? = null
     private val binding: FragmentGalleryBinding
         get() = requireNotNull(_binding) { "앗 ! _binding이 null이다 !" }
@@ -23,7 +25,10 @@ class GalleryFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // 대부분의 로직은 여기에 구현합니다.
+
+        binding.pagerGallery.adapter = GalleryPagerAdapter().apply {
+            setItemList(listOf(R.drawable.sopt_logo, R.drawable.sopt_logo, R.drawable.sopt_logo))
+        }
     }
 
     override fun onDestroyView() {
