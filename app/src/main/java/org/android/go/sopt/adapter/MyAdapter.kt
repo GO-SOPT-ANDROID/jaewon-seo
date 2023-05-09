@@ -12,6 +12,7 @@ class MyAdapter(context: Context) : RecyclerView.Adapter<MyViewHolder>() {
     private  val inflater by lazy {LayoutInflater.from(context)} // context를 활용하여 인플레이터 제작
 
     val itemList : List<Repo> = HomeViewModel().getRepoList()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder { //뷰 홀더 제작
         val binding: ItemGithubRepoBinding = ItemGithubRepoBinding.inflate ( // 아이템 매칭 필요
             inflater, // 레이아웃 인플레이터
