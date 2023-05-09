@@ -20,9 +20,7 @@ class MyAdapter(context: Context) : RecyclerView.Adapter<MyViewHolder>() {
         return MyViewHolder(binding)
     }
 
-    override fun getItemCount(): Int { //배열의 크기
-        return itemList.size
-    }
+    override fun getItemCount() = itemList.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) { // 홀더 제작 후 반환
         holder.onBind(itemList[position])  //배열에서 받아옴

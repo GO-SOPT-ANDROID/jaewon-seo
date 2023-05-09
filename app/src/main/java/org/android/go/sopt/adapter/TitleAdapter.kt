@@ -16,9 +16,7 @@ class TitleAdapter(context: Context) : RecyclerView.Adapter<TitleViewHolder>() {
         )
         return TitleViewHolder(binding)
     }
-    override fun getItemCount(): Int {
-       return 1
-    }
+    override fun getItemCount(): Int { return 1 }
 
     override fun onBindViewHolder(holder: TitleViewHolder, position: Int) { // 홀더 제작 후 반환
         holder.onBind(title)  //배열에서 받아옴
