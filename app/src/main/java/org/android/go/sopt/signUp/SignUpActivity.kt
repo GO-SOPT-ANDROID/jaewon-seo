@@ -34,23 +34,20 @@ class SignUpActivity : AppCompatActivity() {
                     intent.putExtra("specialty", edittextSignupSpecialty.text.toString()) // pw 값 전달
                     setResult(RESULT_OK, intent)
 
-                    Snackbar.make(
-                        binding.root,
-                        "회원가입이 완료되었습니다.",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+                    makeSnackbarMessage("회원가입이 완료되었습니다.")
                     finish()
                 } else {
-                    Snackbar.make(
-                        binding.root,
-                        "정보를 다시 입력해주시길 바랍니다.",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+                    makeSnackbarMessage("정보를 다시 입력해주시길 바랍니다.")
                 }
             }
         }
     }
 
+    private fun makeSnackbarMessage(string: String) {
+        Snackbar.make(
+            binding.root,string,Snackbar.LENGTH_SHORT
+        ).show()
+    }
     private fun makeToastMessage(string: String) {
         Toast.makeText(
             this, string, Toast.LENGTH_SHORT
