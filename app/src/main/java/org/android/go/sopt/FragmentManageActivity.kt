@@ -10,40 +10,41 @@ import org.android.go.sopt.home.SearchFragment
 
 class FragmentManageActivity : AppCompatActivity() {
 
-    lateinit var binding : ActivityFragmentmanageBinding
+    lateinit var binding: ActivityFragmentmanageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFragmentmanageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val currentFragment = supportFragmentManager.findFragmentById(R.id.fcv_main) ?: supportFragmentManager.beginTransaction()
-            .add(R.id.fcv_main, HomeFragment())
-            .commit()
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.fcv_main)
+            ?: supportFragmentManager.beginTransaction()
+                .add(R.id.fcv_main, HomeFragment())
+                .commit()
 
         binding.bnvMain.setOnItemSelectedListener { item ->
-                when (item.itemId) {
-                    R.id.menu_home -> {
-                        changeFragment(HomeFragment())
-                        return@setOnItemSelectedListener true
-                    }
-                    R.id.menu_search -> {
-                        changeFragment(SearchFragment())
-                        return@setOnItemSelectedListener true
-                    }
-                    R.id.menu_gallery -> {
-                        changeFragment(GalleryFragment())
-                        return@setOnItemSelectedListener true
-                    }
+            when (item.itemId) {
+                R.id.menu_home -> {
+                    changeFragment(HomeFragment())
+                    return@setOnItemSelectedListener true
                 }
+                R.id.menu_search -> {
+                    changeFragment(SearchFragment())
+                    return@setOnItemSelectedListener true
+                }
+                R.id.menu_gallery -> {
+                    changeFragment(GalleryFragment())
+                    return@setOnItemSelectedListener true
+                }
+            }
             false
         }
     }
 
-        private fun changeFragment(fragment: Fragment) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fcv_main, fragment)
-                .commit()
-        }
+    private fun changeFragment(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fcv_main, fragment)
+            .commit()
+    }
 
 }

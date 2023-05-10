@@ -12,6 +12,7 @@ import org.android.go.sopt.TitleAdapter
 import org.android.go.sopt.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
+
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding
         get() = requireNotNull(_binding) { "앗 ! _binding이 null이다 !" }

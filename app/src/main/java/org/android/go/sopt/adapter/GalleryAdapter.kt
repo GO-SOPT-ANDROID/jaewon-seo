@@ -7,15 +7,15 @@ import org.android.go.sopt.databinding.ItemPagerBinding
 
 class GalleryAdapter(
     _itemList: List<Int> = listOf(),
-) : RecyclerView.Adapter<GalleryAdapter.HomeViewHolder>() {
+) : RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>() {
     private var itemList: List<Int> = _itemList
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
         val binding = ItemPagerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HomeViewHolder(binding)
+        return GalleryViewHolder(binding)
     }
 
-    class HomeViewHolder(
+    class GalleryViewHolder(
         private val binding: ItemPagerBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(src: Int) {
@@ -23,7 +23,7 @@ class GalleryAdapter(
         }
     }
 
-    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GalleryViewHolder, position: Int) {
         holder.bind(itemList[position])
     }
 
