@@ -7,35 +7,97 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import org.android.go.sopt.data.remote.ServicePool
+import org.android.go.sopt.data.remote.model.RequestSignUpDto
+import org.android.go.sopt.data.remote.model.ResponseSignUpDto
 import org.android.go.sopt.databinding.ActivitySignUpBinding
 import org.android.go.sopt.sginIn.SignInActivity
+import retrofit2.Call
+import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySignUpBinding
+    private val signUpService = ServicePool.signUpService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSignUpBtnClickListener()
+        editOnTextChangeListener()
+     }
+
+    private fun btnSetEnabled(){ //입력된 텍스트 조건을 확인하여 회원 가버튼 활성화
+        with(binding){
+            if (canUserSignIn()) buttonSignupComplete.setEnabled(true)
+            else buttonSignupComplete.setEnabled(false)
+
+        }
+    }
+    private fun editOnTextChangeListener(){ //텍스트 변경을 감지하여 btnSetEnabled함수 호출
+        with(binding){
+            edittextSignupId.addTextChangedListener(CommonTextWatcher(
+                onChanged = { source, _, _, _ -> btnSetEnabled() }
+                )
+            )
+            edittextSignupPw.addTextChangedListener(CommonTextWatcher(
+                onChanged = { source, _, _, _ -> btnSetEnabled() }
+            )
+            )
+            edittextSignupName.addTextChangedListener(CommonTextWatcher(
+                onChanged = { source, _, _, _ -> btnSetEnabled() }
+            )
+            )
+            edittextSignupSpecialty.addTextChangedListener(CommonTextWatcher(
+                onChanged = { source, _, _, _ -> btnSetEnabled() }
+            )
+            )
+        }
+    }
+    private fun completeSignUp() {
+        signUpService.login(
+            with(binding) {
+                RequestSignUpDto(
+                    edittextSignupId.text.toString(),
+                    edittextSignupPw.text.toString(),
+                    edittextSignupName.text.toString(),
+                    edittextSignupSpecialty.text.toString()
+                )
+            }
+        ).enqueue(object : retrofit2.Callback<ResponseSignUpDto> {
+            override fun onResponse(
+                call: Call<ResponseSignUpDto>,
+                response: Response<ResponseSignUpDto>,
+            ) {
+                if (response.isSuccessful) {
+                    response.body()?.message?.let { makeToastMessage(it) } ?: "회원가입에 성공했습니다."
+                    if (!isFinishing) finish()
+                } else {
+                    // 실패한 응답
+                    response.body()?.message?.let { makeToastMessage(it) } ?: "서버통신 실패(40X)"
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
+                t.message?.let { makeToastMessage(it) } ?: "서버통신 실패(응답값 X)"
+            }
+        })
     }
 
     private fun setSignUpBtnClickListener() {
         with(binding)
         {
             buttonSignupComplete.setOnClickListener {
-                if (canUserSignIn()
-                ) { // 특기 이름 != 0
+                if (canUserSignIn()) { //id,pw,이름,특기을 올바르게 입력했는 여부 판단
+                    completeSignUp() //서버와 통신 시작
+                    // 회원가입 성공시 화면 전환
                     val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
-                    intent.putExtra("id", edittextSignupId.text.toString()) // id 값 전달
-                    intent.putExtra("password", edittextSignupPw.text.toString()) // pw 값 전달
-                    intent.putExtra("name", edittextSignupName.text.toString()) // name 값 전달
-                    intent.putExtra("specialty", edittextSignupSpecialty.text.toString()) // pw 값 전달
+                    with(binding) {//바로 id,pw가 입력될 수 있게 값 전달
+                        intent.putExtra("id", edittextSignupId.text.toString()) // id 값 전달
+                        intent.putExtra("password", edittextSignupPw.text.toString()) // pw 값 전달
+                    }
                     setResult(RESULT_OK, intent)
-
-                    makeSnackbarMessage("회원가입이 완료되었습니다.")
-                    finish()
                 } else {
                     makeSnackbarMessage("정보를 다시 입력해주시길 바랍니다.")
                 }
@@ -45,9 +107,10 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun makeSnackbarMessage(string: String) {
         Snackbar.make(
-            binding.root,string,Snackbar.LENGTH_SHORT
+            binding.root, string, Snackbar.LENGTH_SHORT
         ).show()
     }
+
     private fun makeToastMessage(string: String) {
         Toast.makeText(
             this, string, Toast.LENGTH_SHORT

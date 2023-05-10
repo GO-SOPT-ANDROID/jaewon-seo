@@ -117,6 +117,7 @@
 
         <Button
             android:id="@+id/button_signup_complete"
+            android:enabled="false"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
