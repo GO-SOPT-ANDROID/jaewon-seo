@@ -9,9 +9,9 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import org.android.go.sopt.signUp.SignUpActivity
 import org.android.go.sopt.databinding.ActivitySignInBinding
 import org.android.go.sopt.home.FragmentManageActivity
+import org.android.go.sopt.signUp.SignUpActivity
 
 class SignInActivity : AppCompatActivity() {
 
@@ -22,28 +22,15 @@ class SignInActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySignInBinding
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setResultSignUp()
-        binding.buttonMainLogin.setOnClickListener {
-            if (binding.edittextMainId.text.toString() == id && binding.edittextMainPw.text.toString() == pw) {
-                Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
-
-                val intent = Intent(this, FragmentManageActivity::class.java)
-                intent.putExtra("specialty", specialty)
-                intent.putExtra("name", name)
-                startActivity(intent)
-            } else {
-                Toast.makeText(this, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
-            }
-        }
-        binding.buttonMainSignup.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            resultLauncher.launch(intent)
-        }
-
+        setLoginButtonListener()
+        setSignUpButtonListener()
     }
 
     private fun setResultSignUp() {
@@ -58,12 +45,32 @@ class SignInActivity : AppCompatActivity() {
             }
     }
 
+    private fun setLoginButtonListener() {
+        binding.buttonMainLogin.setOnClickListener {
+            if (binding.edittextMainId.text.toString() == id && binding.edittextMainPw.text.toString() == pw) {
+                Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(this, FragmentManageActivity::class.java)
+                intent.putExtra("specialty", specialty)
+                intent.putExtra("name", name)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setSignUpButtonListener() {
+        binding.buttonMainSignup.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            resultLauncher.launch(intent)
+        }
+    }
+
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         val imm: InputMethodManager =
             getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         return super.dispatchTouchEvent(ev)
     }
-
-
 }
