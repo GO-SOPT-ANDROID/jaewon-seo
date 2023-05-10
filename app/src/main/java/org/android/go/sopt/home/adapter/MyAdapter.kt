@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.android.go.sopt.databinding.ItemGithubRepoBinding
 import org.android.go.sopt.home.viewmodel.HomeViewModel
-import org.android.go.sopt.sampledata.Repo
+import org.android.go.sopt.home.data.Repo
 
 class MyAdapter(context: Context) : RecyclerView.Adapter<MyViewHolder>() {
     private  val inflater by lazy {LayoutInflater.from(context)} // context를 활용하여 인플레이터 제작
@@ -32,7 +32,7 @@ class MyAdapter(context: Context) : RecyclerView.Adapter<MyViewHolder>() {
 
 class  MyViewHolder(private val binding: ItemGithubRepoBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(item :Repo){ // 받아온 값을 하나씩 매칭
+        fun onBind(item : Repo){ // 받아온 값을 하나씩 매칭
             binding.tvItemName.text = item.name
             binding.tvItemUrl.text = item.author
         }

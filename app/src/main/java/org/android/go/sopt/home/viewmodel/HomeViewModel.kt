@@ -1,7 +1,7 @@
 package org.android.go.sopt.home.viewmodel
 
 import androidx.lifecycle.ViewModel
-import org.android.go.sopt.sampledata.Repo
+import org.android.go.sopt.home.data.Repo
 
 class HomeViewModel :ViewModel() {
     private val repoList: List<Repo> = listOf(

@@ -1,12 +1,10 @@
-package org.android.go.sopt
+package org.android.go.sopt.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import org.android.go.sopt.R
 import org.android.go.sopt.databinding.ActivityFragmentmanageBinding
-import org.android.go.sopt.home.GalleryFragment
-import org.android.go.sopt.home.HomeFragment
-import org.android.go.sopt.home.SearchFragment
 
 class FragmentManageActivity : AppCompatActivity() {
 

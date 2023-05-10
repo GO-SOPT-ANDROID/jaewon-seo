@@ -1,4 +1,4 @@
-package org.android.go.sopt.sampledata
+package org.android.go.sopt.home.data
 
 data class Repo(
     val name: String,

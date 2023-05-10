@@ -1,4 +1,4 @@
-package org.android.go.sopt
+package org.android.go.sopt.sginIn
 
 import android.app.Activity
 import android.content.Intent
@@ -9,7 +9,9 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import org.android.go.sopt.signUp.SignUpActivity
 import org.android.go.sopt.databinding.ActivitySignInBinding
+import org.android.go.sopt.home.FragmentManageActivity
 
 class SignInActivity : AppCompatActivity() {
 
