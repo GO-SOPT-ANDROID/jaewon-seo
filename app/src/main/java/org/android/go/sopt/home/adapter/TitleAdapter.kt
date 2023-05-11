@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.android.go.sopt.databinding.ItemHomeTitleBinding
 
 class TitleAdapter(context: Context) : RecyclerView.Adapter<TitleViewHolder>() {
-    val title = Text("Jaewon's GithubRepo")
+    val title = Text("Reqres Follwer List")
     private  val inflater by lazy {LayoutInflater.from(context)} // context를 활용하여 인프레이터 제작
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TitleViewHolder { //뷰 홀더 제작
         val binding: ItemHomeTitleBinding = ItemHomeTitleBinding.inflate ( // 아이템 매칭 필요
