@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import org.android.go.sopt.databinding.FragmentGalleryBinding
 import org.android.go.sopt.presentation.viewmodel.GalleryViewModel
 
-class GalleryFragment: Fragment() {
-    val itemList : List<Int> = GalleryViewModel().getImgList() //galleryViewModel img 보관
+class GalleryFragment : Fragment() {
+    val itemList: List<Int> = GalleryViewModel().getImgList() //galleryViewModel img 보관
     private var _binding: FragmentGalleryBinding? = null
     private val binding: FragmentGalleryBinding
-        get() = requireNotNull(_binding) { "앗 ! _binding이 null이다 !" }
+        get() = requireNotNull(_binding) { "binding is null" }
 
     override fun onCreateView(
         inflater: LayoutInflater,

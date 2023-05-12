@@ -44,7 +44,6 @@ class SignInActivity : AppCompatActivity() {
                 if (result.resultCode == Activity.RESULT_OK) {
                     id = result.data?.getStringExtra("id") ?: ""
                     pw = result.data?.getStringExtra("password") ?: ""
-
                     with(binding){
                         edittextMainId.setText(id)
                         edittextMainPw.setText(pw)
@@ -70,7 +69,7 @@ class SignInActivity : AppCompatActivity() {
                 call: Call<ResponseSignInDto>,
                 response: Response<ResponseSignInDto>,
             ) {
-                if (response.isSuccessful && response.body()?.status==200) {//서버 통신 성공시,status=200
+                if (response.isSuccessful) {//서버 통신 성공시
                         response.body()?.message?.let { makeToastMessage(it) } ?: "아이디 비밀번호 일치"
                         changeActivity()
                     if (!isFinishing) finish()

@@ -28,7 +28,7 @@ class SignUpActivity : AppCompatActivity() {
         editOnTextChangeListener()
      }
 
-    private fun btnSetEnabled(){ //입력된 텍스트 조건을 확인하여 회원 가버튼 활성화
+    private fun btnSetEnabled(){ //입력된 텍스트 조건을 확인하여 회원 가압버튼 활성화
         with(binding){
             if (canUserSignIn()) buttonSignupComplete.setEnabled(true)
             else buttonSignupComplete.setEnabled(false)

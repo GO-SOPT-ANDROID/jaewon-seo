@@ -3,7 +3,6 @@ package org.android.go.sopt.presentation.main.home
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import org.android.go.sopt.data.remote.ServicePool

@@ -10,15 +10,16 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.android.go.sopt.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment(), MyAdapter.AdapterCallback{
+class HomeFragment : Fragment(), MyAdapter.AdapterCallback {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding
-        get() = requireNotNull(_binding) { "앗 ! _binding이 null이다 !" }
+        get() = requireNotNull(_binding) { "binding is null" }
 
-    override fun onFailure() { //reqres 통신 실패시
+    override fun onFailure() { //reqres 통신 실패시 Toast message
         Toast.makeText(context, "Failed to fetch data", Toast.LENGTH_SHORT).show()
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,8 +31,8 @@ class HomeFragment : Fragment(), MyAdapter.AdapterCallback{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mydapter = MyAdapter(requireContext(),this)
-        mydapter.fetchData()
+        val mydapter = MyAdapter(requireContext(), this)
+        mydapter.fetchData() //통신을 통해 데이터 fetch
         val concapAdapter = ConcatAdapter(TitleAdapter(requireContext()), mydapter)
         binding.fcvRv.adapter = concapAdapter
         binding.fcvRv.layoutManager = LinearLayoutManager(context)

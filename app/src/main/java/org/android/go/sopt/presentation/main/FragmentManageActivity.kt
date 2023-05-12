@@ -8,36 +8,37 @@ import org.android.go.sopt.databinding.ActivityFragmentmanageBinding
 import org.android.go.sopt.presentation.main.search.SearchFragment
 import org.android.go.sopt.presentation.main.gallery.GalleryFragment
 import org.android.go.sopt.presentation.main.home.HomeFragment
-
 class FragmentManageActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityFragmentmanageBinding
+    private lateinit var binding: ActivityFragmentmanageBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFragmentmanageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val currentFragment = supportFragmentManager.findFragmentById(R.id.fcv_main)
-            ?: supportFragmentManager.beginTransaction()
-                .add(R.id.fcv_main, HomeFragment())
-                .commit()
+        setupBottomNavigationBar()
+        initializeDefaultFragment()
+    }
 
+    private fun setupBottomNavigationBar() {
         binding.bnvMain.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.menu_home -> {
-                    changeFragment(HomeFragment())
-                    return@setOnItemSelectedListener true
-                }
-                R.id.menu_search -> {
-                    changeFragment(SearchFragment())
-                    return@setOnItemSelectedListener true
-                }
-                R.id.menu_gallery -> {
-                    changeFragment(GalleryFragment())
-                    return@setOnItemSelectedListener true
-                }
+            val selectedFragment = when (item.itemId) {
+                R.id.menu_home -> HomeFragment()
+                R.id.menu_search -> SearchFragment()
+                R.id.menu_gallery -> GalleryFragment()
+                else -> null
             }
-            false
+            selectedFragment?.let { changeFragment(it) }
+            return@setOnItemSelectedListener selectedFragment != null
+        }
+    }
+
+    private fun initializeDefaultFragment() {
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.fcv_main)
+        if (currentFragment == null) {
+            val homeFragment = HomeFragment()
+            changeFragment(homeFragment)
         }
     }
 
@@ -47,5 +48,4 @@ class FragmentManageActivity : AppCompatActivity() {
             .replace(R.id.fcv_main, fragment)
             .commit()
     }
-
 }

@@ -18,7 +18,7 @@ data class ResponseFollowerDto(
     val total: Int,
     @SerialName("total_pages")
     val total_pages: Int
-){
+) {
     @Serializable
     data class Data(
         @SerialName("avatar")
@@ -32,6 +32,7 @@ data class ResponseFollowerDto(
         @SerialName("last_name")
         val last_name: String
     )
+
     @Serializable
     data class Support(
         @SerialName("text")
@@ -39,6 +40,7 @@ data class ResponseFollowerDto(
         @SerialName("url")
         val url: String
     )
+
     fun toFollower() = datas.map { data ->
         Follower(
             avatar = data.avatar,
