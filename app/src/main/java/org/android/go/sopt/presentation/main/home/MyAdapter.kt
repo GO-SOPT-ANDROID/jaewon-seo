@@ -3,13 +3,17 @@ package org.android.go.sopt.presentation.main.home
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import org.android.go.sopt.data.remote.ServicePool
 import org.android.go.sopt.data.remote.dto.ResponseFollowerDto
 import org.android.go.sopt.databinding.ItemPeopleBinding
 
-class MyAdapter(private val context: Context) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class MyAdapter(
+    private val context: Context,
+    private val callback: AdapterCallback
+    ) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var followerList: List<ResponseFollowerDto.Data>? = null
 
@@ -18,6 +22,9 @@ class MyAdapter(private val context: Context) : RecyclerView.Adapter<MyAdapter.M
         return MyViewHolder(binding)
     }
 
+    interface AdapterCallback {
+        fun onFailure()
+    }
     override fun getItemCount(): Int {
         return followerList?.size ?: 0
     }
@@ -37,12 +44,12 @@ class MyAdapter(private val context: Context) : RecyclerView.Adapter<MyAdapter.M
                     val followerDto = response.body()
                     followerList = followerDto?.datas
                     notifyDataSetChanged()
-                } else {
-                    // Handle error
+                } else{
+                    callback.onFailure()
                 }
             }
             override fun onFailure(call: retrofit2.Call<ResponseFollowerDto>, t: Throwable) {
-                // Handle failure
+                callback.onFailure()
             }
         })
     }
