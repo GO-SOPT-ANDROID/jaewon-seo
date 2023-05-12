@@ -2,9 +2,10 @@ package org.android.go.sopt.data.remote.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.android.go.sopt.home.data.Follower
 
 @Serializable
-data class ResponseReqresDto(
+data class ResponseFollowerDto(
     @SerialName("data")
     val datas: List<Data>,
     @SerialName("page")
@@ -38,6 +39,14 @@ data class ResponseReqresDto(
         @SerialName("url")
         val url: String
     )
+    fun toFollower() = datas.map { data ->
+        Follower(
+            avatar = data.avatar,
+            email = data.email,
+            first_name = data.first_name,
+            last_name = data.last_name
+        )
+    }
 }
 
 

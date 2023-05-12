@@ -24,13 +24,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_item_url"
+        app:layout_constraintBottom_toTopOf="@+id/tv_item_email"
         app:layout_constraintStart_toEndOf="@+id/iv_item_image"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="name" />
+        tools:text="first + Last name" />
 
     <TextView
-        android:id="@+id/tv_item_url"
+        android:id="@+id/tv_item_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -38,6 +38,6 @@
         app:layout_constraintEnd_toEndOf="@+id/tv_item_name"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tv_item_name"
-        tools:text="github 주소" />
+        tools:text="email 주소" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

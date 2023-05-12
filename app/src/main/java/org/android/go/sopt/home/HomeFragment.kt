@@ -1,5 +1,6 @@
 package org.android.go.sopt.home
 
+import MyAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import org.android.go.sopt.MyAdapter
 import org.android.go.sopt.TitleAdapter
 import org.android.go.sopt.databinding.FragmentHomeBinding
 
@@ -28,7 +28,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val concapAdapter = ConcatAdapter(TitleAdapter(requireContext()), MyAdapter(requireContext()))
+        val mydapter = MyAdapter(requireContext())
+        mydapter.fetchData()
+        val concapAdapter = ConcatAdapter(TitleAdapter(requireContext()), mydapter)
         binding.fcvRv.adapter = concapAdapter
         binding.fcvRv.layoutManager = LinearLayoutManager(context)
     }
