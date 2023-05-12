@@ -1,4 +1,4 @@
-package org.android.go.sopt.home.data
+package org.android.go.sopt.presentation.data
 
 data class Follower(
     val avatar: String,

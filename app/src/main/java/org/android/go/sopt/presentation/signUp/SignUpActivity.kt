@@ -1,4 +1,4 @@
-package org.android.go.sopt.signUp
+package org.android.go.sopt.presentation.signUp
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,10 +8,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import org.android.go.sopt.data.remote.ServicePool
-import org.android.go.sopt.data.remote.model.RequestSignUpDto
-import org.android.go.sopt.data.remote.model.ResponseSignUpDto
+import org.android.go.sopt.data.remote.dto.RequestSignUpDto
+import org.android.go.sopt.data.remote.dto.ResponseSignUpDto
 import org.android.go.sopt.databinding.ActivitySignUpBinding
-import org.android.go.sopt.sginIn.SignInActivity
+import org.android.go.sopt.presentation.sginIn.SignInActivity
 import retrofit2.Call
 import retrofit2.Response
 
@@ -37,19 +37,23 @@ class SignUpActivity : AppCompatActivity() {
     }
     private fun editOnTextChangeListener(){ //텍스트 변경을 감지하여 btnSetEnabled함수 호출
         with(binding){
-            edittextSignupId.addTextChangedListener(CommonTextWatcher(
+            edittextSignupId.addTextChangedListener(
+                CommonTextWatcher(
                 onChanged = { source, _, _, _ -> btnSetEnabled() }
                 )
             )
-            edittextSignupPw.addTextChangedListener(CommonTextWatcher(
+            edittextSignupPw.addTextChangedListener(
+                CommonTextWatcher(
                 onChanged = { source, _, _, _ -> btnSetEnabled() }
             )
             )
-            edittextSignupName.addTextChangedListener(CommonTextWatcher(
+            edittextSignupName.addTextChangedListener(
+                CommonTextWatcher(
                 onChanged = { source, _, _, _ -> btnSetEnabled() }
             )
             )
-            edittextSignupSpecialty.addTextChangedListener(CommonTextWatcher(
+            edittextSignupSpecialty.addTextChangedListener(
+                CommonTextWatcher(
                 onChanged = { source, _, _, _ -> btnSetEnabled() }
             )
             )

@@ -1,13 +1,12 @@
-package org.android.go.sopt.home
+package org.android.go.sopt.presentation.main.gallery
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import org.android.go.sopt.home.adapter.GalleryAdapter
 import org.android.go.sopt.databinding.FragmentGalleryBinding
-import org.android.go.sopt.home.viewmodel.GalleryViewModel
+import org.android.go.sopt.presentation.viewmodel.GalleryViewModel
 
 class GalleryFragment: Fragment() {
     val itemList : List<Int> = GalleryViewModel().getImgList() //galleryViewModel img 보관

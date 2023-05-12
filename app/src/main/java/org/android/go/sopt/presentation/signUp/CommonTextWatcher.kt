@@ -1,4 +1,4 @@
-package org.android.go.sopt.signUp
+package org.android.go.sopt.presentation.signUp
 
 import android.text.Editable
 import android.text.TextWatcher

@@ -1,6 +1,5 @@
-package org.android.go.sopt.home
+package org.android.go.sopt.presentation.main.home
 
-import MyAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import org.android.go.sopt.TitleAdapter
 import org.android.go.sopt.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {

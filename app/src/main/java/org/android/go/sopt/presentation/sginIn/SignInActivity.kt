@@ -1,4 +1,4 @@
-package org.android.go.sopt.sginIn
+package org.android.go.sopt.presentation.sginIn
 
 import android.app.Activity
 import android.content.Intent
@@ -10,11 +10,11 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import org.android.go.sopt.data.remote.ServicePool
-import org.android.go.sopt.data.remote.model.RequestSignInDto
-import org.android.go.sopt.data.remote.model.ResponseSignInDto
+import org.android.go.sopt.data.remote.dto.RequestSignInDto
+import org.android.go.sopt.data.remote.dto.ResponseSignInDto
 import org.android.go.sopt.databinding.ActivitySignInBinding
-import org.android.go.sopt.home.FragmentManageActivity
-import org.android.go.sopt.signUp.SignUpActivity
+import org.android.go.sopt.presentation.main.FragmentManageActivity
+import org.android.go.sopt.presentation.signUp.SignUpActivity
 import retrofit2.Call
 import retrofit2.Response
 

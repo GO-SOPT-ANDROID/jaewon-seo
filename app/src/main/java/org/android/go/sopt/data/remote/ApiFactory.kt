@@ -25,7 +25,7 @@ object ReqresApiFactory {
     private const val BASE_URL = BuildConfig.REQRES_BASE_URL //local properties에 base url 기재
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://reqres.in")
+            .baseUrl(BASE_URL)
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
     }

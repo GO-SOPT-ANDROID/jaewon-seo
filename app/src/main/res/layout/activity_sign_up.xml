@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:paddingVertical="30dp"
         android:paddingHorizontal="30dp"
-        tools:context=".signUp.SignUpActivity">
+        tools:context=".presentation.signUp.SignUpActivity">
 
         <TextView
             android:id="@+id/textview_signup_title"

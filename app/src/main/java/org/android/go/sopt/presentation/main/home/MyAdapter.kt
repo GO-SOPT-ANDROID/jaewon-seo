@@ -1,10 +1,12 @@
+package org.android.go.sopt.presentation.main.home
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import org.android.go.sopt.data.remote.ServicePool
-import org.android.go.sopt.data.remote.model.ResponseFollowerDto
+import org.android.go.sopt.data.remote.dto.ResponseFollowerDto
 import org.android.go.sopt.databinding.ItemPeopleBinding
 
 class MyAdapter(private val context: Context) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {

@@ -1,4 +1,4 @@
-package org.android.go.sopt
+package org.android.go.sopt.presentation.main.home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -28,7 +28,7 @@ data class Text(
 )
 class  TitleViewHolder(private val binding: ItemHomeTitleBinding):
     RecyclerView.ViewHolder(binding.root) {
-    fun onBind(item :Text){
+    fun onBind(item : Text){
         binding.tvHomeTitle.text = item.text
     }
 }
