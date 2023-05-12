@@ -26,39 +26,40 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSignUpBtnClickListener()
         editOnTextChangeListener()
-     }
+    }
 
-    private fun btnSetEnabled(){ //입력된 텍스트 조건을 확인하여 회원 가압버튼 활성화
-        with(binding){
+    private fun btnSetEnabled() { //입력된 텍스트 조건을 확인하여 회원 가입버튼 활성화
+        with(binding) {
             if (canUserSignIn()) buttonSignupComplete.setEnabled(true)
             else buttonSignupComplete.setEnabled(false)
-
         }
     }
-    private fun editOnTextChangeListener(){ //텍스트 변경을 감지하여 btnSetEnabled함수 호출
-        with(binding){
+
+    private fun editOnTextChangeListener() { //텍스트 변경을 감지하여 btnSetEnabled함수 호출
+        with(binding) {
             edittextSignupId.addTextChangedListener(
                 CommonTextWatcher(
-                onChanged = { source, _, _, _ -> btnSetEnabled() }
+                    onChanged = { source, _, _, _ -> btnSetEnabled() }
                 )
             )
             edittextSignupPw.addTextChangedListener(
                 CommonTextWatcher(
-                onChanged = { source, _, _, _ -> btnSetEnabled() }
-            )
+                    onChanged = { source, _, _, _ -> btnSetEnabled() }
+                )
             )
             edittextSignupName.addTextChangedListener(
                 CommonTextWatcher(
-                onChanged = { source, _, _, _ -> btnSetEnabled() }
-            )
+                    onChanged = { source, _, _, _ -> btnSetEnabled() }
+                )
             )
             edittextSignupSpecialty.addTextChangedListener(
                 CommonTextWatcher(
-                onChanged = { source, _, _, _ -> btnSetEnabled() }
-            )
+                    onChanged = { source, _, _, _ -> btnSetEnabled() }
+                )
             )
         }
     }
+
     private fun completeSignUp() {
         signUpService.signIUp(
             with(binding) {
@@ -76,6 +77,7 @@ class SignUpActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     response.body()?.message?.let { makeToastMessage(it) } ?: "회원가입에 성공했습니다."
+                    changeActivity()
                     if (!isFinishing) finish()
                 } else {
                     // 실패한 응답
@@ -85,26 +87,26 @@ class SignUpActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
                 t.message?.let { makeToastMessage(it) } ?: "서버통신 실패(응답값 X)"
+
             }
         })
+    }
+
+    private fun changeActivity() {
+        // 회원가입 성공시 화면 전환
+        val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
+        with(binding) {//바로 id,pw가 입력될 수 있게 값 전달
+            intent.putExtra("id", edittextSignupId.text.toString()) // id 값 전달
+            intent.putExtra("password", edittextSignupPw.text.toString()) // pw 값 전달
+        }
+        setResult(RESULT_OK, intent)
     }
 
     private fun setSignUpBtnClickListener() {
         with(binding)
         {
             buttonSignupComplete.setOnClickListener {
-                if (canUserSignIn()) { //id,pw,이름,특기을 올바르게 입력했는 여부 판단
-                    completeSignUp() //서버와 통신 시작
-                    // 회원가입 성공시 화면 전환
-                    val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
-                    with(binding) {//바로 id,pw가 입력될 수 있게 값 전달
-                        intent.putExtra("id", edittextSignupId.text.toString()) // id 값 전달
-                        intent.putExtra("password", edittextSignupPw.text.toString()) // pw 값 전달
-                    }
-                    setResult(RESULT_OK, intent)
-                } else {
-                    makeSnackbarMessage("정보를 다시 입력해주시길 바랍니다.")
-                }
+                completeSignUp() //서버와 통신 시작
             }
         }
     }
