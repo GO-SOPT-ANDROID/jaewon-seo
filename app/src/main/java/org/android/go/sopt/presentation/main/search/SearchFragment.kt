@@ -1,4 +1,4 @@
-package org.android.go.sopt.home
+package org.android.go.sopt.presentation.main.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,7 +16,7 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? { // 이제 반환하는 View가 Null일 수 없기 때문에, ?를 지워주셔도 됩니다.
+    ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }

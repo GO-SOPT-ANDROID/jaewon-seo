@@ -1,4 +1,4 @@
-package org.android.go.sopt.home
+package org.android.go.sopt.presentation.main.gallery
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,28 +6,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import org.android.go.sopt.databinding.FragmentGalleryBinding
+import org.android.go.sopt.presentation.viewmodel.GalleryViewModel
 
-class GalleryFragment: Fragment() {
+class GalleryFragment : Fragment() {
+    val itemList: List<Int> = GalleryViewModel().getImgList() //galleryViewModel img 보관
     private var _binding: FragmentGalleryBinding? = null
     private val binding: FragmentGalleryBinding
-        get() = requireNotNull(_binding) { "앗 ! _binding이 null이다 !" }
+        get() = requireNotNull(_binding) { "binding is null" }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? { // 이제 반환하는 View가 Null일 수 없기 때문에, ?를 지워주셔도 됩니다.
+    ): View {
         _binding = FragmentGalleryBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // 대부분의 로직은 여기에 구현합니다.
+        //
+        binding.pagerGallery.adapter = GalleryAdapter().apply {
+            setItemList(itemList) //galleryViewModel에서 받아온 값 설정
+        }
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
     }
 }
