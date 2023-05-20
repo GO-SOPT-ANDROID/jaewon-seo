@@ -1,5 +1,6 @@
-package org.android.go.sopt.presentation.viewmodel
+package org.android.go.sopt.presentation.sginIn
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.android.go.sopt.data.remote.ServicePool.signInService
@@ -10,7 +11,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SignInViewModel : ViewModel() {
-    val signInResult: MutableLiveData<ResponseSignInDto> = MutableLiveData()
+    private val _signInResult: MutableLiveData<ResponseSignInDto> = MutableLiveData()
+    val signInResult: LiveData<ResponseSignInDto> = _signInResult
 
     fun signIn(id: String, password: String) {
         signInService.login(
@@ -24,7 +26,7 @@ class SignInViewModel : ViewModel() {
                 response: Response<ResponseSignInDto>,
             ) {
                 if (response.isSuccessful) {
-                    signInResult.value = response.body()
+                    _signInResult.value = response.body()
                 } else {
                     // TODO: 에러 처리
                 }

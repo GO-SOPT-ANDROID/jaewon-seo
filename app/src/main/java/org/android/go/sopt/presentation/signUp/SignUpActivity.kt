@@ -5,27 +5,35 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import org.android.go.sopt.data.remote.ServicePool
-import org.android.go.sopt.data.remote.dto.RequestSignUpDto
-import org.android.go.sopt.data.remote.dto.ResponseSignUpDto
 import org.android.go.sopt.databinding.ActivitySignUpBinding
 import org.android.go.sopt.presentation.sginIn.SignInActivity
-import retrofit2.Call
-import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySignUpBinding
-    private val signUpService = ServicePool.signUpService
 
+    // LiveData가 저장되어 있는 ViewModel
+    private val viewModel by viewModels<SignUpViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSignUpBtnClickListener()
         editOnTextChangeListener()
+
+        //signUnResult 관찰자 설정 통신 성공했을 때 변화 일어남
+        viewModel.signUpResult.observe(this) { signUpResult ->
+            changeActivity()
+            makeToastMessage(
+                signUpResult.message
+            )
+        }
+        viewModel.errorResult.observe(this) {errorResult ->
+            makeSnackbarMessage(errorResult.message)
+        }
     }
 
     private fun btnSetEnabled() { //입력된 텍스트 조건을 확인하여 회원 가입버튼 활성화
@@ -60,38 +68,6 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun completeSignUp() {
-        signUpService.signIUp(
-            with(binding) {
-                RequestSignUpDto(
-                    edittextSignupId.text.toString(),
-                    edittextSignupPw.text.toString(),
-                    edittextSignupName.text.toString(),
-                    edittextSignupSpecialty.text.toString()
-                )
-            }
-        ).enqueue(object : retrofit2.Callback<ResponseSignUpDto> {
-            override fun onResponse(
-                call: Call<ResponseSignUpDto>,
-                response: Response<ResponseSignUpDto>,
-            ) {
-                if (response.isSuccessful) {
-                    response.body()?.message?.let { makeToastMessage(it) } ?: "회원가입에 성공했습니다."
-                    changeActivity()
-                    if (!isFinishing) finish()
-                } else {
-                    // 실패한 응답
-                    response.body()?.message?.let { makeToastMessage(it) } ?: "서버통신 실패(40X)"
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
-                t.message?.let { makeToastMessage(it) } ?: "서버통신 실패(응답값 X)"
-
-            }
-        })
-    }
-
     private fun changeActivity() {
         // 회원가입 성공시 화면 전환
         val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
@@ -106,7 +82,12 @@ class SignUpActivity : AppCompatActivity() {
         with(binding)
         {
             buttonSignupComplete.setOnClickListener {
-                completeSignUp() //서버와 통신 시작
+                viewModel.signUp(
+                    edittextSignupId.text.toString(),
+                    edittextSignupPw.text.toString(),
+                    edittextSignupName.text.toString(),
+                    edittextSignupSpecialty.text.toString()
+                )
             }
         }
     }

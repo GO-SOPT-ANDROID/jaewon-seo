@@ -10,15 +10,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import org.android.go.sopt.data.remote.ServicePool
-import org.android.go.sopt.data.remote.dto.RequestSignInDto
-import org.android.go.sopt.data.remote.dto.ResponseSignInDto
 import org.android.go.sopt.databinding.ActivitySignInBinding
 import org.android.go.sopt.presentation.main.FragmentManageActivity
 import org.android.go.sopt.presentation.signUp.SignUpActivity
-import org.android.go.sopt.presentation.viewmodel.SignInViewModel
-import retrofit2.Call
-import retrofit2.Response
 
 class SignInActivity : AppCompatActivity() {
 
@@ -27,7 +21,6 @@ class SignInActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySignInBinding
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-    private val signInService = ServicePool.signInService
 
     // LiveData가 저장되어 있는 ViewModel
     private val viewModel by viewModels<SignInViewModel>()
@@ -40,6 +33,19 @@ class SignInActivity : AppCompatActivity() {
         setResultSignUp()
         setLoginButtonListener()
         setSignUpButtonListener()
+
+        //signInResult 관찰자 설정 통신 성공했을 때 변화 일어남
+        viewModel.signInResult.observe(this) { signInResult ->
+            startActivity(
+                Intent(
+                    this@SignInActivity,
+                    FragmentManageActivity::class.java
+                )
+            )
+            makeToastMessage(
+                signInResult.message
+            )
+        }
     }
     private fun setResultSignUp() {
         resultLauncher =
@@ -69,18 +75,6 @@ class SignInActivity : AppCompatActivity() {
                     binding.edittextMainPw.text.toString()
                 )
             }
-        }
-        //signInResult 관찰자 설정 통신 성공했을 때 변화 일어남
-        viewModel.signInResult.observe(this) { signInResult ->
-            startActivity(
-                Intent(
-                    this@SignInActivity,
-                    FragmentManageActivity::class.java
-                )
-            )
-            makeToastMessage(
-                signInResult.message
-            )
         }
     }
 
