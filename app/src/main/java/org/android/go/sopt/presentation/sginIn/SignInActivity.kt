@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import org.android.go.sopt.data.remote.ServicePool
 import org.android.go.sopt.data.remote.dto.RequestSignInDto
@@ -15,6 +16,7 @@ import org.android.go.sopt.data.remote.dto.ResponseSignInDto
 import org.android.go.sopt.databinding.ActivitySignInBinding
 import org.android.go.sopt.presentation.main.FragmentManageActivity
 import org.android.go.sopt.presentation.signUp.SignUpActivity
+import org.android.go.sopt.presentation.viewmodel.SignInViewModel
 import retrofit2.Call
 import retrofit2.Response
 
@@ -27,6 +29,9 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private val signInService = ServicePool.signInService
 
+    // LiveData가 저장되어 있는 ViewModel
+    private val viewModel by viewModels<SignInViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
@@ -36,8 +41,6 @@ class SignInActivity : AppCompatActivity() {
         setLoginButtonListener()
         setSignUpButtonListener()
     }
-
-
     private fun setResultSignUp() {
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -52,38 +55,6 @@ class SignInActivity : AppCompatActivity() {
             }
     }
 
-    private fun changeActivity(){
-        val intent = Intent(this, FragmentManageActivity::class.java)
-        startActivity(intent)
-    }
-    private fun tryLogin() {
-        signInService.login(
-            with(binding) {
-                RequestSignInDto(
-                    edittextMainId.text.toString(),
-                    edittextMainPw.text.toString()
-                )
-            }
-        ).enqueue(object : retrofit2.Callback<ResponseSignInDto> {
-            override fun onResponse(
-                call: Call<ResponseSignInDto>,
-                response: Response<ResponseSignInDto>,
-            ) {
-                if (response.isSuccessful) {//서버 통신 성공시
-                        response.body()?.message?.let { makeToastMessage(it) } ?: "아이디 비밀번호 일치"
-                        changeActivity()
-                    if (!isFinishing) finish()
-                } else {
-                    // 실패한 응답
-                    response.body()?.message?.let { makeToastMessage(it) } ?: "서버통신 실패(40X)"
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseSignInDto>, t: Throwable) {
-                t.message?.let { makeToastMessage(it) } ?: "서버통신 실패(응답값 X)"
-            }
-        })
-    }
 
     private fun makeToastMessage(string: String) {
         Toast.makeText(
@@ -91,8 +62,25 @@ class SignInActivity : AppCompatActivity() {
         ).show()
     }
     private fun setLoginButtonListener() {
-        binding.buttonMainLogin.setOnClickListener {
-            tryLogin()
+        with(binding){
+            buttonMainLogin.setOnClickListener {
+                viewModel.signIn(
+                    binding.edittextMainId.text.toString(),
+                    binding.edittextMainPw.text.toString()
+                )
+            }
+        }
+        //signInResult 관찰자 설정 통신 성공했을 때 변화 일어남
+        viewModel.signInResult.observe(this) { signInResult ->
+            startActivity(
+                Intent(
+                    this@SignInActivity,
+                    FragmentManageActivity::class.java
+                )
+            )
+            makeToastMessage(
+                signInResult.message
+            )
         }
     }
 
