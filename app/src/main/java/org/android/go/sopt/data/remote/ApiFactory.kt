@@ -3,11 +3,23 @@ package org.android.go.sopt.data.remote
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.android.go.sopt.BuildConfig
+import org.android.go.sopt.data.remote.interceptor.AuthInterceptor
 import org.android.go.sopt.data.remote.service.FollowerService
 import org.android.go.sopt.data.remote.service.SignInService
 import org.android.go.sopt.data.remote.service.SignUpService
 import retrofit2.Retrofit
+
+object ApiFactory {
+    private val client by lazy {
+        OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().apply {
+            level =
+                if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+        }).addInterceptor(AuthInterceptor()).build()
+    }
+}
 
 object SignInUpApiFactory {
     private const val BASE_URL = BuildConfig.AUTH_BASE_URL //local properties에 base url 기재
