@@ -6,11 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.android.go.sopt.databinding.FragmentHomeBinding
+import org.android.go.sopt.presentation.viewmodel.FollowerViewModel
 
 class HomeFragment : Fragment(), MyAdapter.AdapterCallback {
+    private val followerViewModel: FollowerViewModel by viewModels()
 
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding
@@ -31,9 +35,17 @@ class HomeFragment : Fragment(), MyAdapter.AdapterCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mydapter = MyAdapter(requireContext(), this)
-        mydapter.fetchData() //통신을 통해 데이터 fetch
-        val concapAdapter = ConcatAdapter(TitleAdapter(requireContext()), mydapter)
+        val myAdapter = MyAdapter(requireContext())
+
+        followerViewModel.followerListLiveData.observe(
+            viewLifecycleOwner,
+            Observer { followerList ->
+                myAdapter.setFollowerList(followerList)
+            })
+        followerViewModel.fetchFollowerData()
+
+        val concapAdapter = ConcatAdapter(TitleAdapter(requireContext()), myAdapter)
+
         binding.fcvRv.adapter = concapAdapter
         binding.fcvRv.layoutManager = LinearLayoutManager(context)
     }
