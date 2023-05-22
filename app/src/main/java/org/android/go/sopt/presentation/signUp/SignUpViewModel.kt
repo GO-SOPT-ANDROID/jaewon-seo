@@ -22,29 +22,41 @@ class SignUpViewModel : ViewModel() {
     val name = MutableLiveData<String>()
     val specialty = MutableLiveData<String>()
 
+    val idErrorMessage = MutableLiveData<String>()
+
     val isIdValid = MediatorLiveData<Boolean>().apply {
         addSource(id) { value = validateId(it) }
+        addSource(idErrorMessage) { errorMessage ->
+            value = errorMessage.isNullOrEmpty()
+        }
     }
 
     val isPwValid = MediatorLiveData<Boolean>().apply {
         addSource(pw) { value = validatePw(it) }
     }
 
-    val isFormValid = MediatorLiveData<Boolean>().apply {
+    val isFormValid: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         addSource(isIdValid) { value = checkFormValid() }
         addSource(isPwValid) { value = checkFormValid() }
+        addSource(name) { value = checkFormValid() }
+        addSource(specialty) { value = checkFormValid() }
     }
 
     private fun validateId(id: String?): Boolean {
-        return id != null && id.matches(Regex("[a-zA-Z0-9]{6,10}"))
+        return id.isNullOrEmpty() || id.matches(Regex("[a-zA-Z0-9]{6,10}"))
     }
 
     private fun validatePw(pw: String?): Boolean {
-        return pw != null && pw.matches(Regex("[a-zA-Z0-9!@#\$%^&*()]{8,12}"))
+        return pw.isNullOrEmpty() || pw.matches(Regex("[a-zA-Z0-9!@#\$%^&*()]{8,12}"))
     }
 
     private fun checkFormValid(): Boolean {
-        return isIdValid.value == true && isPwValid.value == true && !name.value.isNullOrBlank() && !specialty.value.isNullOrBlank()
+        val isIdValid = validateId(id.value)
+        val isPwValid = validatePw(pw.value)
+        val isNameValid = !name.value.isNullOrBlank()
+        val isSpecialtyValid = !specialty.value.isNullOrBlank()
+
+        return isIdValid && isPwValid && isNameValid && isSpecialtyValid
     }
 
     fun signUp() {

@@ -61,6 +61,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/textview_signup_id" />
 
             <TextView
+                android:id="@+id/textview_signup_id_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@{viewModel.isIdValid || viewModel.id.length()==0 ? null : @string/id_error_message}"
+                android:textColor="@color/warning_red"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edittext_signup_id" />
+
+            <TextView
                 android:id="@+id/textview_signup_pw"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -69,7 +80,7 @@
                 android:text="@string/pw"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edittext_signup_id" />
+                app:layout_constraintTop_toBottomOf="@+id/textview_signup_id_error" />
 
             <EditText
                 android:id="@+id/edittext_signup_pw"
@@ -85,6 +96,18 @@
                 tools:ignore="MissingConstraints" />
 
             <TextView
+                android:id="@+id/textview_signup_pw_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@{viewModel.isPwValid || viewModel.pw.length()==0 ? null : @string/pw_error_message}"
+                android:textColor="@color/warning_red"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edittext_signup_pw" />
+
+
+            <TextView
                 android:id="@+id/textview_signup_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -93,7 +116,7 @@
                 android:text="@string/name"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edittext_signup_pw" />
+                app:layout_constraintTop_toBottomOf="@+id/textview_signup_pw_error" />
 
             <EditText
                 android:id="@+id/edittext_signup_name"
