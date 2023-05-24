@@ -1,12 +1,15 @@
 package org.android.go.sopt.presentation.signUp
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import org.android.go.sopt.databinding.ActivitySignUpBinding
 
@@ -15,6 +18,7 @@ class SignUpActivity : AppCompatActivity() {
     private val viewModel by viewModels<SignUpViewModel>()
     private lateinit var binding: ActivitySignUpBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
@@ -22,6 +26,10 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        with(viewModel) {
+
+        }
 
         // Observe signUpResult LiveData
         viewModel.signUpResult.observe(this) { signUpResult ->
@@ -33,13 +41,29 @@ class SignUpActivity : AppCompatActivity() {
             makeSnackbarMessage(errorResult.message)
         }
 
+        viewModel.isIdValid.observe(this, Observer { isValid ->
+            if (!isValid) {
+                binding.edittextSignupId.backgroundTintList = ColorStateList.valueOf(Color.RED)
+            } else {
+                binding.edittextSignupId.backgroundTintList = ColorStateList.valueOf(Color.BLACK)
+            }
+        })
+
+        viewModel.isPwValid.observe(this, Observer { isValid ->
+            if (!isValid) {
+                binding.edittextSignupPw.backgroundTintList = ColorStateList.valueOf(Color.RED)
+            } else {
+                binding.edittextSignupPw.backgroundTintList = ColorStateList.valueOf(Color.BLACK)
+            }
+        })
+
         setSignUpBtnClickListener()
     }
 
     private fun setSignUpBtnClickListener() {
         with(binding) {
             buttonSignupComplete.setOnClickListener {
-              viewModel?.signUp()
+                viewModel?.signUp()
             }
         }
     }

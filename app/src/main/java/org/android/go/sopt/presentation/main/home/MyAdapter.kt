@@ -43,7 +43,7 @@ class MyAdapter(
             with(binding) {
                 tvItemName.text = "${follower.first_name} ${follower.last_name}"
                 tvItemEmail.text = follower.email
-                Log.d("G", follower.avatar)
+                Log.d("G", follower.first_name)
                 ivItemImage.load(follower.avatar)
             }
         }
