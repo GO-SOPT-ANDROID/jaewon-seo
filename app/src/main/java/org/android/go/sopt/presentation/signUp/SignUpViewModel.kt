@@ -41,13 +41,17 @@ class SignUpViewModel : ViewModel() {
         addSource(name) { value = checkFormValid() }
         addSource(specialty) { value = checkFormValid() }
     }
-
-    private fun validateId(id: String?): Boolean {
-        return id.isNullOrEmpty() || id.matches(Regex("[a-zA-Z0-9]{6,10}"))
+    companion object {
+        private val ID_REGEX = Regex("[a-zA-Z0-9]{6,10}")
+        private val PW_REGEX = Regex("[a-zA-Z0-9!@#\$%^&*()]{8,12}")
     }
 
-    private fun validatePw(pw: String?): Boolean {
-        return pw.isNullOrEmpty() || pw.matches(Regex("[a-zA-Z0-9!@#\$%^&*()]{8,12}"))
+    fun validateId(id: String?): Boolean {
+        return id.isNullOrEmpty() || id.matches(ID_REGEX)
+    }
+
+    fun validatePw(pw: String?): Boolean {
+        return pw.isNullOrEmpty() || pw.matches(PW_REGEX)
     }
 
     private fun checkFormValid(): Boolean {
