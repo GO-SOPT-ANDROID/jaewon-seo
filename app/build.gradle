@@ -24,6 +24,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "AUTH_BASE_URL", properties["auth.base.url"]
         buildConfigField "String", "REQRES_BASE_URL", properties["reqres.base.url"]
+        buildConfigField "String", "IMAGE_BASE_URL", properties["image.base.url"]
     }
 
     buildTypes {
@@ -56,7 +57,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     // Coil
-    implementation "io.coil-kt:coil:1.1.1"
+    implementation 'io.coil-kt:coil:2.3.0'
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1' //직렬화/역직렬화 라이브러리

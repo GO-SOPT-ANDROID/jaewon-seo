@@ -8,9 +8,11 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.android.go.sopt.BuildConfig
 import org.android.go.sopt.data.remote.interceptor.AuthInterceptor
 import org.android.go.sopt.data.remote.service.FollowerService
+import org.android.go.sopt.data.remote.service.ImageService
 import org.android.go.sopt.data.remote.service.SignInService
 import org.android.go.sopt.data.remote.service.SignUpService
 import retrofit2.Retrofit
+import retrofit2.create
 
 object ApiFactory {
     private val client by lazy {
@@ -19,6 +21,18 @@ object ApiFactory {
                 if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
         }).addInterceptor(AuthInterceptor()).build()
     }
+
+    private const val BASE_URL = BuildConfig.AUTH_BASE_URL //local properties에 base url 기재
+    val retrofitforImage: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+            .build()
+    }
+
+    inline fun <reified T> create(): T = retrofitforImage.create<T>(T::class.java)
+
+
 }
 
 object SignInUpApiFactory {
@@ -49,4 +63,5 @@ object ServicePool {
     val signUpService = SignInUpApiFactory.create<SignUpService>()
     val signInService = SignInUpApiFactory.create<SignInService>()
     val followerService = ReqresApiFactory.create<FollowerService>()
+    val imageService = ApiFactory.retrofitforImage.create<ImageService>()
 }
