@@ -27,10 +27,6 @@ class SignUpActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        with(viewModel) {
-
-        }
-
         // Observe signUpResult LiveData
         viewModel.signUpResult.observe(this) { signUpResult ->
             changeActivity()
