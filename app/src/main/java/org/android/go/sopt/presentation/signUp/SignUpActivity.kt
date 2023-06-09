@@ -6,12 +6,12 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import org.android.go.sopt.databinding.ActivitySignUpBinding
+import org.android.go.sopt.util.toast
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -30,7 +30,7 @@ class SignUpActivity : AppCompatActivity() {
         // Observe signUpResult LiveData
         viewModel.signUpResult.observe(this) { signUpResult ->
             changeActivity()
-            makeToastMessage(signUpResult.message)
+            toast(signUpResult.message)
         }
 
         viewModel.errorResult.observe(this) { errorResult ->
@@ -76,10 +76,6 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun makeSnackbarMessage(string: String) {
         Snackbar.make(binding.root, string, Snackbar.LENGTH_SHORT).show()
-    }
-
-    private fun makeToastMessage(string: String) {
-        Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
