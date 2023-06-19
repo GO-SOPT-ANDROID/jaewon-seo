@@ -27,6 +27,11 @@ class SignUpActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        observe()
+        setSignUpBtnClickListener()
+    }
+
+    private fun observe() {
         // Observe signUpResult LiveData
         viewModel.signUpResult.observe(this) { signUpResult ->
             changeActivity()
@@ -52,8 +57,6 @@ class SignUpActivity : AppCompatActivity() {
                 binding.edittextSignupPw.backgroundTintList = ColorStateList.valueOf(Color.BLACK)
             }
         })
-
-        setSignUpBtnClickListener()
     }
 
     private fun setSignUpBtnClickListener() {
