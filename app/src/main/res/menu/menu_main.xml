@@ -8,7 +8,11 @@
         android:icon="@drawable/ic_launcher_foreground"
         android:title="검색" />
     <item
+        android:id="@+id/menu_music"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="음악" />
+    <item
         android:id="@+id/menu_gallery"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="갤러리" />
+        android:title="음악 등록" />
 </menu>
