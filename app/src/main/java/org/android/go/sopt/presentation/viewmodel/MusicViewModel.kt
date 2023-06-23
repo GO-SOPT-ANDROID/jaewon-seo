@@ -30,7 +30,7 @@ class MusicViewModel : ViewModel() {
 
             override fun onFailure(call: Call<ResponseGetMusicDto>, t: Throwable) {
                 // handle failure
-                Log.e("API Error", t.message, t)
+
             }
         })
     }

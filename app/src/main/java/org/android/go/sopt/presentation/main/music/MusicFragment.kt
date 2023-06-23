@@ -38,7 +38,7 @@ class MusicFragment : Fragment(), MusicAdapter.AdapterCallback {
             Observer { musicList ->
                 musicAdapter.setMusicList(musicList)
             })
-        musicViewModel.fetchMusicData("daehwan2yo")
+        musicViewModel.fetchMusicData("seoseo7")
         binding.musicGrid.adapter = musicAdapter
         binding.musicGrid.layoutManager = gridLayoutManager
     }

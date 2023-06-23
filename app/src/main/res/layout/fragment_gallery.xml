@@ -7,40 +7,57 @@
     tools:context=".presentation.main.gallery.GalleryFragment">
 
     <ImageView
-        android:id="@+id/iv_gallery_image1"
-        android:layout_width="100dp"
+        android:id="@+id/iv_gallery_image"
+        android:layout_width="200dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="50dp"
+        android:textSize="10sp"
+        android:text="음악의 이미지를 골라주세요"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/sopt_logo" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <ImageView
-        android:id="@+id/iv_gallery_image2"
-        android:layout_width="100dp"
+    <TextView
+        android:id="@+id/tv_gllaery_title"
+        android:layout_width="300dp"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="50dp"
+        android:textSize="20sp"
         android:layout_marginTop="50dp"
-        app:layout_constraintDimensionRatio="1:1"
-       app:layout_constraintTop_toBottomOf="@id/iv_gallery_image1"
+        android:text="제목"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:src="@drawable/sopt_logo" />
+        app:layout_constraintTop_toBottomOf="@id/iv_gallery_image" />
 
-    <ImageView
-        android:id="@+id/iv_gallery_image3"
-        android:layout_width="100dp"
+    <EditText
+        android:id="@+id/et_gllaery_title"
+        android:layout_width="300dp"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="50dp"
+        android:hint="제목을 입력하세요."
+        app:layout_constraintEnd_toEndOf="@+id/tv_gllaery_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_gllaery_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_gllaery_title" />
+
+    <TextView
+        android:id="@+id/tv_gllaery_singer"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:textSize="20sp"
         android:layout_marginTop="50dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/iv_gallery_image2"
+        android:text="가수"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:src="@drawable/sopt_logo" />
+        app:layout_constraintTop_toBottomOf="@id/et_gllaery_title" />
+
+    <EditText
+        android:id="@+id/et_gllaery_singer"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:hint="가수 이름을 입력하세요."
+        app:layout_constraintEnd_toEndOf="@+id/tv_gllaery_singer"
+        app:layout_constraintStart_toStartOf="@+id/tv_gllaery_singer"
+        app:layout_constraintTop_toBottomOf="@id/tv_gllaery_singer" />
 
 
     <Button
@@ -48,10 +65,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:text="이미지 가져오기"
+        android:text="Music Post"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_gallery_image3" />
+        app:layout_constraintTop_toBottomOf="@id/et_gllaery_singer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
