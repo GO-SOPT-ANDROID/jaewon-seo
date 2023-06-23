@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -19,6 +20,7 @@ class MusicFragment : Fragment(), MusicAdapter.AdapterCallback {
     private var _binding: FragmentMusicBinding? = null
     private val binding: FragmentMusicBinding
         get() = requireNotNull(_binding) { "앗 ! _binding이 null이다 !" }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +40,11 @@ class MusicFragment : Fragment(), MusicAdapter.AdapterCallback {
             Observer { musicList ->
                 musicAdapter.setMusicList(musicList)
             })
-        musicViewModel.fetchMusicData("seoseo7")
+
+        val pref = context?.getSharedPreferences("autoLogIn", AppCompatActivity.MODE_PRIVATE)
+        val id = pref?.getString("id", "").toString()
+
+        musicViewModel.fetchMusicData(id)
         binding.musicGrid.adapter = musicAdapter
         binding.musicGrid.layoutManager = gridLayoutManager
     }

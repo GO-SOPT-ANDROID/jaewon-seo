@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
@@ -46,17 +47,30 @@ class GalleryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         locatePermissionlauncher.launch("android.permission.ACCESS_FINE_LOCATION")
-        binding.btnGallery.setOnClickListener {
-            viewModel.postMusicData("seoseo77", "hii", "seojaewon")
-        }
-        binding.ivGalleryImage.setOnClickListener {
-            launcher.launch("image/*")
-        }
+
+        setOnClickListener()
     }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    private fun setOnClickListener() {
+
+        val pref = context?.getSharedPreferences("autoLogIn", AppCompatActivity.MODE_PRIVATE)
+        val id = pref?.getString("id", "").toString()
+
+        with(binding) {
+            btnGallery.setOnClickListener {
+                viewModel.postMusicData(id, etGllaeryTitle.text.toString(), etGllaerySinger.text.toString())
+            }
+            ivGalleryImage.setOnClickListener {
+                launcher.launch("image/*")
+            }
+        }
     }
 }
