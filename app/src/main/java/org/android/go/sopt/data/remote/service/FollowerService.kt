@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface FollowerService {
     @GET("/api/users")
-    fun getFollowerList(
+    suspend fun getFollowerList(
         @Query("page") num: Int = 2 //anotation 알아보기
-    ): Call<ResponseFollowerDto>
+    ): ResponseFollowerDto
 }

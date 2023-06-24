@@ -8,6 +8,6 @@ import retrofit2.http.Path
 interface GetMusicService {
     @GET("{id}/music")
     fun getMusic(
-        @Path(value = "id") id: String
+        @Path("id") id: String
     ): Call<ResponseGetMusicDto>
 }
