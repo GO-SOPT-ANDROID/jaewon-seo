@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--장소 권한 요청 (대략)-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--장소 권한 요청 (정확), (대략)을 받아야지 샤용가능하다-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:usesCleartextTraffic="true"
@@ -29,7 +33,7 @@
         </activity>
         <activity
             android:name=".presentation.main.FragmentManageActivity"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
         </activity>

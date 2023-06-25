@@ -1,13 +1,15 @@
 package org.android.go.sopt.presentation.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import org.android.go.sopt.R
 import org.android.go.sopt.databinding.ActivityFragmentmanageBinding
-import org.android.go.sopt.presentation.main.search.SearchFragment
 import org.android.go.sopt.presentation.main.gallery.GalleryFragment
 import org.android.go.sopt.presentation.main.home.HomeFragment
+import org.android.go.sopt.presentation.main.search.MusicFragment
+import org.android.go.sopt.presentation.main.search.SearchFragment
+
 class FragmentManageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFragmentmanageBinding
@@ -27,6 +29,7 @@ class FragmentManageActivity : AppCompatActivity() {
                 R.id.menu_home -> HomeFragment()
                 R.id.menu_search -> SearchFragment()
                 R.id.menu_gallery -> GalleryFragment()
+                R.id.menu_music -> MusicFragment()
                 else -> null
             }
             selectedFragment?.let { changeFragment(it) }

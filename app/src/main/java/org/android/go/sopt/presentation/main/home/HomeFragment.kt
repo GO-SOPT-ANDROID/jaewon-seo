@@ -42,7 +42,6 @@ class HomeFragment : Fragment(), MyAdapter.AdapterCallback {
             Observer { followerList ->
                 myAdapter.setFollowerList(followerList)
             })
-        followerViewModel.fetchFollowerData()
 
         val concapAdapter = ConcatAdapter(TitleAdapter(requireContext()), myAdapter)
 
